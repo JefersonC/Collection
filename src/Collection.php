@@ -2,18 +2,17 @@
 
 namespace jefersonc\Collection;
 
-class Collection
+abstract class Collection
 {
     private $beginPointer;
     private $endPointer;
     private $counter = 0;
 
-    public function __construct()
+    /**
+     * @param Linker $item
+     */
+    public function add(Linker $item)
     {
-
-    }
-
-    public function add(Item $item) {
         if (! $this->beginPointer) {
             $this->beginPointer = $item;
         }
@@ -31,11 +30,15 @@ class Collection
         $this->counter++;
     }
 
-    public function removeFromEnd() : Item {
+    /**
+     * @return Linker
+     */
+    public function removeFromEnd() : Linker
+    {
         if($this->counter > 0) {
             $item = $this->endPointer;
             $previous = $item->prev();
-            $previous->setNext(null);
+            $previous->cleanNext();
             $this->endPointer = $previous;
             $this->counter--;
 
@@ -45,11 +48,15 @@ class Collection
         throw new Exception('has no itens on collection');
     }
 
-    public function removeFromBegin() : Item {
+    /**
+     * @return Linker
+     */
+    public function removeFromBegin() : Linker
+    {
         if($this->counter > 0) {
             $item = $this->beginPointer;
             $next = $item->next();
-            $next->setPrev(null);
+            $next->cleanPrev();
             $this->beginPointer = $next;
             $this->counter--;
 
@@ -58,4 +65,36 @@ class Collection
 
         throw new Exception('has no itens on collection');
     }
+
+    /**
+     * @return int
+     */
+    public function count() : int
+    {
+        return $this->counter;
+    }
+
+    public function first() {
+        return $this->beginPointer;
+    }
+
+    public function last() {
+        return $this->endPointer;
+    }
+
+    /**
+     * @param $value
+     * @return void
+     */
+    public function push($value)
+    {
+        $item = new Node($value);
+
+        $this->add($item);
+    }
+
+    /**
+     * @return mixed
+     */
+    abstract public function retrive();
 }

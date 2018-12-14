@@ -35,8 +35,8 @@
     },
     "scripts": {
         "test": "phpunit --config phpunit.xml --testsuite=all",
-        "check-style": "phpcs src tests",
-        "fix-style": "phpcbf src tests"
+        "check-style": "phpcs src",
+        "fix-style": "phpcbf src"
     },
     "config": {
         "sort-packages": true
