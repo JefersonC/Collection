@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  tester:
+    image: ambientum/php:7.2
+    container_name: tester
+    command: composer test
+    environment:
+      - XDEBUG_ENABLED=true
+    volumes:
+      - .:/var/www/app

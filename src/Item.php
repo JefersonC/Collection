@@ -4,14 +4,39 @@ namespace jefersonc\Collection;
 
 class Item
 {
-    private $prev;
-    private $next;
-    private $value;
+    private $prevPointer;
+    private $nextPointer;
+    private $guarded;
 
-    public function __construct($value, &$prev = null, &$next = null)
+    public function __construct(mixed $guarded, Item &$prevPointer = null, Item &$nextPointer = null)
     {
-        $this->value = $value;
-        $this->prev = $prev;
-        $this->next = $next;
+        $this->guarded = $guarded;
+        $this->prevPointer = $prevPointer;
+        $this->nextPointer = $next;
+    }
+
+    public function value() : mixed
+    {
+        return $this->guarded;
+    }
+
+    public function prev() : Item
+    {
+        return $this->prevPointer;
+    }
+
+    public function next() : Item
+    {
+        return $this->nextPointer;
+    }
+
+    public function setPrev(Item &$item = null)
+    {
+        $htis->prevPointer = $item;
+    }
+
+    public function setNext(Item &$item = null)
+    {
+        $htis->nextPointer = $item;
     }
 }

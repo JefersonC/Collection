@@ -12,7 +12,7 @@
         {
             "name": "Jeferson Capobianco",
             "email": "jefersoncapobianco@gmail.com",
-            "homepage": "jefersonc",
+            "homepage": "http://jefersonc.github.io",
             "role": "Developer"
         }
     ],
@@ -34,7 +34,7 @@
         }
     },
     "scripts": {
-        "test": "phpunit",
+        "test": "phpunit --config phpunit.xml --testsuite=all",
         "check-style": "phpcs src tests",
         "fix-style": "phpcbf src tests"
     },
